@@ -5,7 +5,8 @@
       "options": [
         "React.makeComponent()",
         "React.createComponent()",
-        "React.createElement()"
+        "React.createElement()",
+        "React.createModule()"
       ],
       "resposta": "React.createElement()",
       "id": "p1"
@@ -15,20 +16,21 @@
       "options": [
         "import Component from \"./Component\"",
         "require(\"./Component\")",
-        "import \"./Component\""
+        "import \"./Component\"",
+        "import from (|Component|)"
       ],
       "resposta": "import Component from \"./Component\"",
       "id": "p2"
     },
     {
       "pergunta": "Qual hook não é nativo?",
-      "options": ["useEffect()", "useFetch()", "useCallback()"],
+      "options": ["useEffect()", "useFetch()", "useCallback()", "useState()"],
       "resposta": "useFetch()",
       "id": "p3"
     },
     {
       "pergunta": "Qual palavra deve ser utilizada para criarmos um hook?",
-      "options": ["set", "get", "use"],
+      "options": ["set", "get", "use", "create"],
       "resposta": "use",
       "id": "p4"
     }

@@ -1,32 +1,28 @@
-import React from 'react';
+import React from "react";
+import "./radio.css";
 
 const Radio = ({ pergunta, options, onChange, value, id, active }) => {
   if (active === false) return null;
   return (
-    <fieldset
-      style={{
-        padding: '2rem',
-        marginBottom: '1rem',
-        border: '2px solid #eee',
-      }}
-    >
-      <legend style={{ fontWeight: 'bold' }}>{pergunta}</legend>
+    <div className="container_question">
+      <p className="question_title">{pergunta}</p>
       {options.map((option) => (
-        <label
-          key={option}
-          style={{ marginBottom: '1rem', fontFamily: 'monospace' }}
-        >
-          <input
-            type="radio"
-            id={id}
-            checked={value === option}
-            value={option}
-            onChange={onChange}
-          />
-          {option}
-        </label>
+        <div key={option} className="conteiner_option">
+          <div key={option} className="box_option">
+            <label className="input_option">
+              <input
+                type="radio"
+                id={id}
+                checked={value === option}
+                value={option}
+                onChange={onChange}
+              />
+              {option}
+            </label>
+          </div>
+        </div>
       ))}
-    </fieldset>
+    </div>
   );
 };
 
