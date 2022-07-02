@@ -1,58 +1,24 @@
 import React from "react";
 import Radio from "../radio/Radio";
-import { questions } from '../../data/questions.json';
-const perguntas = [
-  {
-    pergunta: "Qual método é utilizado para criar componentes?",
-    options: [
-      "React.makeComponent()",
-      "React.createComponent()",
-      "React.createElement()",
-    ],
-    resposta: "React.createElement()",
-    id: "p1",
-  },
-  {
-    pergunta: "Como importamos um componente externo?",
-    options: [
-      'import Component from "./Component"',
-      'require("./Component")',
-      'import "./Component"',
-    ],
-    resposta: 'import Component from "./Component"',
-    id: "p2",
-  },
-  {
-    pergunta: "Qual hook não é nativo?",
-    options: ["useEffect()", "useFetch()", "useCallback()"],
-    resposta: "useFetch()",
-    id: "p3",
-  },
-  {
-    pergunta: "Qual palavra deve ser utilizada para criarmos um hook?",
-    options: ["set", "get", "use"],
-    resposta: "use",
-    id: "p4",
-  },
-];
+import "./question.css";
 
 const Question = () => {
-  //const perguntas = questions;
-
+  const [perguntas, setPerguntas] = React.useState([]);
   const [respostas, setRespostas] = React.useState({
     p1: "",
     p2: "",
     p3: "",
     p4: "",
   });
+
   const [slide, setSlide] = React.useState(0);
   const [resultado, setResultado] = React.useState(null);
 
-  // React.useEffect(() => {
-  //   fetch("../../data/questions.json")
-  //     .then((response) => response.json())
-  //     .then((response) => console.log(response));
-  // }, []);
+  React.useEffect(() => {
+    fetch("http://localhost:3333/questions")
+      .then((response) => response.json())
+      .then((response) => setPerguntas(response));
+  }, []);
 
   function handleChange({ target }) {
     setRespostas({ ...respostas, [target.id]: target.value });
@@ -74,23 +40,40 @@ const Question = () => {
     }
   }
 
+  function handleResetClick() {
+    setSlide(0);
+    setResultado(null);
+  }
+
   return (
-    <form onSubmit={(event) => event.preventDefault()}>
-      {perguntas.map((pergunta, index) => (
-        <Radio
-          active={slide === index}
-          key={pergunta.id}
-          value={respostas[pergunta.id]}
-          onChange={handleChange}
-          {...pergunta}
-        />
-      ))}
-      {resultado ? (
-        <p>{resultado}</p>
-      ) : (
-        <button onClick={handleClick}>Próxima</button>
-      )}
-    </form>
+    <div className="container_form">
+      <form onSubmit={(event) => event.preventDefault()} className="form">
+        {perguntas.map((pergunta, index) => (
+          <Radio
+            active={slide === index}
+            key={pergunta.id}
+            value={respostas[pergunta.id]}
+            onChange={handleChange}
+            {...pergunta}
+          />
+        ))}
+
+        {resultado ? (
+          <div className="result_box">
+            <p>{resultado}</p>{" "}
+            <button className="button reset_button" onClick={handleResetClick}>
+              Reiniciar
+            </button>{" "}
+          </div>
+        ) : (
+          <div className="buttons_box">
+            <button className="button next_button" onClick={handleClick}>
+              Próxima
+            </button>
+          </div>
+        )}
+      </form>
+    </div>
   );
 };
 
