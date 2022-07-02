@@ -2,6 +2,8 @@ import React from "react";
 import Radio from "../radio/Radio";
 import "./question.css";
 
+import { Link } from "react-router-dom";
+
 const Question = () => {
   const [perguntas, setPerguntas] = React.useState([]);
   const [respostas, setRespostas] = React.useState({
@@ -64,9 +66,14 @@ const Question = () => {
             <button className="button reset_button" onClick={handleResetClick}>
               Reiniciar
             </button>{" "}
+            <Link to="/">
+              <button className="button next_button" onClick={handleClick}>
+                Início
+              </button>
+            </Link>
           </div>
         ) : (
-          <div className="buttons_box">
+          <div className="buttons_box">           
             <button className="button next_button" onClick={handleClick}>
               Próxima
             </button>
