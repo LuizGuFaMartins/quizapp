@@ -1,11 +1,9 @@
 import './App.css';
-import InitialPage from './components/initial-page/InitialPage';
-import Question from './components/question/Question';
+import RoutesComponent from './routes/RoutesComponent';
 
 function App() {
   return (
-  //  <Question></Question>
-   <InitialPage></InitialPage>
+    <RoutesComponent/>
   );
 }
 
